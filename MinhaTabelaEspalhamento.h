@@ -7,6 +7,8 @@
 // TabelaEspalhamentoAbstrata
 #include "excecoes.h"
 // ExcecaoDadoInexistente
+#include <math.h>
+//função pow para converter string em numero
 
 template <typename T, std::size_t capac>
 class MinhaTabelaEspalhamento final : public TabelaEspalhamentoAbstrata<T, capac>
@@ -21,7 +23,7 @@ public:
     virtual std::size_t capacidade() const
     {
         // substitua a linha abaixo pelo algoritmo esperado
-        return -1;
+        return capac;
     };
 
     /**
@@ -32,7 +34,7 @@ public:
      */
     virtual void inserir(T dado) 
     {
-        // escreva o algoritmo esperado
+        
     };
 
     /**
@@ -92,6 +94,7 @@ protected:
     virtual std::size_t funcaoEspalhamento(T dado) const
     {
         // substitua a linha abaixo pelo algoritmo esperado
+        //para que serve a funçãoEspalhamento se eu ja fiz o hash nas funções abaixo???????? 
         return -1;
     };
 
@@ -107,7 +110,7 @@ private:
     std::size_t codigoEspalhamento(U integral) const
     {
         // substitua a linha abaixo pelo algoritmo esperado. Dica use std::is_integral_v<U> para garantir que U é um tipo integral
-        return 0;
+        return static_cast<std::size_t>(integral);
     };
 
     /**
@@ -118,8 +121,14 @@ private:
      */
     std::size_t codigoEspalhamento(std::string const &string) const
     {
-        // Implemente aqui.
-        return 0;
+        std::size_t hash = 0;
+        std::size_t n = string.length();
+
+        for (std::size_t i = 0; i < n; ++i) {
+            hash += static_cast<std::size_t>(string[i]) * static_cast<std::size_t>(pow(31, n - (i + 1)));
+        }
+
+        return hash;
     }
 };
 

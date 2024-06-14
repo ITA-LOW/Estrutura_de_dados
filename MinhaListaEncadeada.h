@@ -21,7 +21,7 @@
 template <typename T>
 class MinhaListaEncadeada : public ListaEncadeadaAbstrata<T>
 {
-    public:
+public:
     /**
      * @brief Destrutor. Destroi todos os elementos da lista
      */

@@ -20,6 +20,7 @@
  * @tparam _capacidade O tamanho da tabela. Tem que ser maior que 0.
  */
 template<typename T, std::size_t capac>
+
 class TabelaEspalhamentoAbstrata
 {
 public:
