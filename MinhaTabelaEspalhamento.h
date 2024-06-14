@@ -60,14 +60,20 @@ public:
     };
 
     /**
-     * @brief Obtém a quantidade de dados contidos na árvore.
+     * @brief Obtém a quantidade de dados contidos na tabela (tabela nesse caso são as casas dos pombos).
      *
      * @return Um inteiro maior ou igual a 0.
      */
     virtual std::size_t quantidade() const
     {
-        // substitua a linha abaixo pelo algoritmo esperado
-        return -1;
+        std::size_t quantidade = 0;
+        std::size_t i;
+
+        for(i = 0; i < capac; ++i){
+            quantidade += this->tabela[i].tamanho(); //visito cada casa de pombo e conto quantos tem la
+        }
+
+        return quantidade;
     };
 
     /**
