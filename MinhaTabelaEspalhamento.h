@@ -11,6 +11,7 @@
 //função pow para converter string em numero
 
 template <typename T, std::size_t capac>
+
 class MinhaTabelaEspalhamento final : public TabelaEspalhamentoAbstrata<T, capac>
 {
 public:
@@ -34,7 +35,8 @@ public:
      */
     virtual void inserir(T dado) 
     {
-        
+        std::size_t casa = funcaoEspalhamento(dado);
+        this->tabela.at(casa).inserirNoFim(dado);
     };
 
     /**
@@ -45,6 +47,8 @@ public:
      */
     virtual void remover(T dado) {
         // escreva o algoritmo esperado
+        std::size_t casa = funcaoEspalhamento(dado);
+        this->tabela.at(casa).remover(dado);
     };
 
     /**
@@ -55,9 +59,11 @@ public:
      */
     virtual bool contem(T dado) const
     {
-        // substitua a linha abaixo pelo algoritmo esperado
-        return false;
+        size_t casa; //casa é dado%capac
+        casa = funcaoEspalhamento(dado);
+        return this->tabela.at(casa).contem(dado);
     };
+    
 
     /**
      * @brief Obtém a quantidade de dados contidos na tabela (tabela nesse caso são as casas dos pombos).
@@ -84,11 +90,13 @@ public:
      * @return A posição do dado na tabela estando ele ou não na tabela e, caso
      * esteja, a posição na lista.
      */
-    Posicao posicao(T dado) const
+    /* Posicao posicao(T dado) const
     {
-        // substitua a linha abaixo pelo algoritmo esperado
-        return Posicao{0, 0, 0};
-    };
+        std::size_t posTabela = funcaoEspalhamento(dado);
+        std::size_t tamLista = this->tabela.at(posTabela).tamanho();
+        std::optional<std::size_t> (posLista) = this->tabela.at(posTabela).posicao(dado);
+        return Posicao{posTabela, tamLista, posLista};
+    }; */
 
 protected:
     /**
@@ -99,9 +107,7 @@ protected:
      */
     virtual std::size_t funcaoEspalhamento(T dado) const
     {
-        // substitua a linha abaixo pelo algoritmo esperado
-        //para que serve a funçãoEspalhamento se eu ja fiz o hash nas funções abaixo???????? 
-        return -1;
+        return codigoEspalhamento(dado)%capac;
     };
 
 private:
